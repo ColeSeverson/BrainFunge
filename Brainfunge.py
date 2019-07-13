@@ -22,7 +22,7 @@ for line in fileinput.input():
 
 while(True):
     if(pos[0] >= len(sourceInput) or pos[1] >= len(sourceInput[pos[0]])
-            or pos[0] < 0 or pos[1] < 0):
+            or pos[0] < 0 or pos[1] < 0 or pointer < 0 or pointer > 1023):
         break
     symbol = sourceInput[pos[0]][pos[1]]
     #tape options
@@ -50,7 +50,39 @@ while(True):
     elif symbol == 'i':
         print(int(tape[pointer]), end = "")
     #TODO add conditionals 
-
+    elif symbol == '[' and tape[pointer] == 0:
+        tempdir = direction
+        while(symbol != ']'):
+            if(pos[0] >= len(sourceInput) or pos[1] >= len(sourceInput[pos[0]])
+                    or pos[0] < 0 or pos[1] < 0):
+                break
+            symbol = sourceInput[pos[0]][pos[1]]
+            if symbol == ">":
+                tempdir = RIGHT
+            elif symbol == "<":
+                tempdir = LEFT
+            elif symbol == "^":
+                tempdir = UP
+            elif symbol == "v":
+                tempdir = DOWN
+            pos = (pos[0] + tempdir[0], pos[1] + tempdir[1])
+        pos = (pos[0] + tempdir[0], pos[1] + tempdir[1])
+    elif symbol == ']' and tape[pointer] != 0:
+        tempdir = direction
+        while(symbol != '['):
+            if(pos[0] >= len(sourceInput) or pos[1] >= len(sourceInput[pos[0]])
+                    or pos[0] < 0 or pos[1] < 0):
+                break
+            symbol = sourceInput[pos[0]][pos[1]]
+            if symbol == ">":
+                tempdir = RIGHT
+            elif symbol == "<":
+                tempdir = LEFT
+            elif symbol == "^":
+                tempdir = UP
+            elif symbol == "v":
+                tempdir = DOWN
+            pos = (pos[0] + tempdir[0], pos[1] + tempdir[1])
     #Execute a move. This is also the default option for whitespace or unrecognized characters
     pos = (pos[0] + direction[0], pos[1] + direction[1])
 #Setup finished
