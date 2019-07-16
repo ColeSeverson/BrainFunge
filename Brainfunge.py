@@ -49,6 +49,8 @@ while(True):
         print(chr(tape[pointer]), end = "")
     elif symbol == 'i':
         print(int(tape[pointer]), end = "")
+    elif symbol == ',':
+        tape[pointer] = ord(getch.getch())
     #TODO add conditionals 
     elif symbol == '|':
         if tape[pointer] == 0:
