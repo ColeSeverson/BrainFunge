@@ -1,5 +1,6 @@
 import fileinput
 import sys
+import getch
 
 #ALL Setup
 
